@@ -20,13 +20,8 @@ jobs:
         - swift test
     - stage: macOS test
       os: osx
-      osx_image: xcode9.3
+      osx_image: xcode10.3
       language: swift
-      sudo: required
-      install:
-        - wget https://swift.org/builds/swift-${SWIFT_VERSION}-release/xcode/swift-${SWIFT_VERSION}-RELEASE/swift-${SWIFT_VERSION}-RELEASE-osx.pkg
-        - sudo installer -pkg swift-${SWIFT_VERSION}-RELEASE-osx.pkg -target /
-        - export PATH="/Library/Developer/Toolchains/$SWIFT_VERSION.xctoolchain/usr/bin:$PATH"
       script:
         - swift package update
         - swift test
