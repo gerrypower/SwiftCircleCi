@@ -25,3 +25,9 @@ jobs:
       script:
         - swift package update
         - swift test
+    - stage: iOS test
+      os: osx
+      osx_image: xcode10.3
+      language: swift
+      script:
+        - xcodebuild test -scheme SwiftCircleCi-Package -destination "platform=iOS Simulator,OS=13.0,name=iPhone 11 Pro"
