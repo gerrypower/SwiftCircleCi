@@ -1,0 +1,20 @@
+
+env:
+  global:
+    - SWIFT_VERSION=5.0.3
+    - SWIFT_URL=https://swift.org/builds/swift-${SWIFT_VERSION}-release/ubuntu1404/swift-${SWIFT_VERSION}-RELEASE/swift-${SWIFT_VERSION}-RELEASE-ubuntu14.04.tar.gz
+jobs:
+  include:
+    - stage: Linux test
+      dist: trusty
+      sudo: required
+      language: generic
+      os: linux
+      install:
+        - sudo apt-get install clang libicu-dev
+        - mkdir swift
+        - curl $SWIFT_URL -s | tar xz -C swift &> /dev/null
+        - export PATH=$(pwd)/swift/swift-${SWIFT_VERSION}-RELEASE-ubuntu14.04/usr/bin:$PATH
+      script:
+        - swift package update
+        - swift test
